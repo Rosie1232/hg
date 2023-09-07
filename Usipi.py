@@ -16,8 +16,26 @@ async def on_ready():
     print(f'We have logged in as {bot.user}')
 
 @bot.command()
+async def yardım(ctx):
+    await ctx.send('"/" sembolünü -havalı(herhangi bir isim), merhaba, Usipi, kek ve yardım- kelimelerinin başında yazarak sana cevap vermemi sağlayabilirsin.')
+    await ctx.send('Örnek kullanımlar;')
+    await ctx.send('/Usipi')
+    await ctx.send('/merhaba')
+    await ctx.send('/görüşürüz')
+    await ctx.send('/havalı Usipi')
+    await ctx.send('/kek (mutfak...)')
+    await ctx.send('bu şekilde. İyi eğlenceler.\U0001f642')
+    time.sleep(2)
+    await ctx.send('(Yinede yeterli değil mi? "acelya.1"e doğrudan yazarak fikirlerini söyleyebilirsin. Böylece daha eğlenceli olurum belki. :))')
+
+
+@bot.command()
 async def Usipi(ctx):
     await ctx.send(f'Efendim {ctx.author}cım?')
+
+@bot.command()
+async def görüşürüz(ctx):
+    await ctx.send(f'Sonra görüşürüz {ctx.author} \U0001f642!')
 
 @bot.command()
 async def merhaba(ctx):
@@ -25,22 +43,16 @@ async def merhaba(ctx):
 
 @bot.command()
 async def joined(ctx, member: discord.Member):
-    """Says when a member joined."""
     await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
 
 @bot.group()
-async def havalı(ctx):
-    """Says if a user is cool.
-
-    In reality this just checks if a subcommand is being invoked.
-    """
+async def havalı(ctx):.
     if ctx.invoked_subcommand is None:
         await ctx.send(f'Hayır, {ctx.subcommand_passed} havalı değil.')
 
 
 @havalı.command(name='acelya')
 async def _acelya(ctx):
-    """Is the bot cool?"""
     await ctx.send('Evet, Açelya çok havalı.') 
 
 @havalı.command(name='Usipi')
