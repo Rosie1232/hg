@@ -56,4 +56,4 @@ async def kek(ctx):
 async def mutfak(ctx):
         await ctx.send('Harika! Malzemeleri buldun. Tamam kolaydı evet. Peki kekini neyli yapmak istersin?')
 
-bot.run("MTE0NDMwMTU5MTI5MDE4Nzk0OA.G7CQx8.Bir29bUAcI1ZNWnpd8UUdyKck7T0fjEiXOzhCI")
+bot.run("")
