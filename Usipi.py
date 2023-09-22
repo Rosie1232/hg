@@ -55,7 +55,7 @@ async def oyun(ctx, tahmin):
 @bot.command()
 async def tahmin(ctx):
     await ctx.send('Kolay mı orta mı zor mu?')
-    @tahmin.command()
+    @bot.command()
     async def kolay(ctx, sayi):
         sayi = random.randint(0, 11)
         await ctx.send('0 ile 10 arasından bir sayı seçtim.')
@@ -80,7 +80,7 @@ async def havalı(ctx):
         await ctx.send(f'Hayır, {ctx.subcommand_passed} havalı değil.')
 
 bot.command()
-async def nasilsin(ctx, emojiler):
+async def nasilsin(ctx):
     emojiler = ["\U0001f62D", "\U0001f601", "\U0001f610", '\U0001f622', "\U0001f922", "\U0001f621", "\U0001f60C", "\U0001f62A", "\U0001fAE5", "\U0001f92A", "\U0001F973"]
     durum = random.choices(emojiler)
     if durum == "\U0001f62D":
