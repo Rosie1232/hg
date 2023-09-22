@@ -5,6 +5,7 @@ import os
 #from password import gen_pass
 from discord.ext import commands
 import time
+import emoji
 # ayricaliklar (intents) değişkeni botun ayrıcalıklarını depolayacak
 intents = discord.Intents.default()
 # Mesajları okuma ayrıcalığını etkinleştirelim
@@ -46,30 +47,29 @@ async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
     await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
 
-@bot.group()
-async def oyun(ctx):
+@bot.command()
+async def oyun(ctx, tahmin):
     await ctx.send('Ne oynamak istersin?')
     await ctx.send('Eğer tahmin oyununu oynamak istiyorsan hangi zorlukta (kolay/orta/zor) oynamak istediğini belirtmeyi unutma!')
 
-@oyun.command()
-async def tahmin(ctx, kolay, orta, zor, sayi, anahtar):
-    if len(ctx.content) > 8:
-        if ctx.content > kolay:
-            sayi = random.randint(0, 11)
-            await ctx.send('0 ile 10 arasından bir sayı seçtim.')
-            await ctx.send('Bulabilmek ve bu kilidi açabilmek için üç hakkın var.\U0001f512')
-        else:
-            await ctx.send('Üzgünüm. Maalesef anlayamadım.\U0001f610')
-@oyun.command()
-async def sayi(ctx, sayi, anahtar):
-    for i in range(3):
-        if sayi == ctx.content:
-            await ctx.send('Harika! Seçtiğim sayıyı bulabildin ve bir anahtar kazandın!\U0001f511')
-            anahtar += 1
-        else:
-            await ctx.send('Yanlış!\U0001f512')
-    if anahtar == 0:
-        await ctx.send('Malesef bulamadın. Belki de en baştan başlayıp tekrar deneyebilirsin!\U0001f510')
+@bot.command()
+async def tahmin(ctx):
+    await ctx.send('Kolay mı orta mı zor mu?')
+    @tahmin.command()
+    async def kolay(ctx, sayi):
+        sayi = random.randint(0, 11)
+        await ctx.send('0 ile 10 arasından bir sayı seçtim.')
+        await ctx.send('Bulabilmek ve bu kilidi açabilmek için üç hakkın var.\U0001f512')
+        @kolay.command()
+        async def sayi(ctx, sayi, anahtar):
+            for i in range(3):
+                if sayi == ctx.content:
+                    await ctx.send('Harika! Seçtiğim sayıyı bulabildin ve bir anahtar kazandın!\U0001f511')
+                    anahtar += 1
+                else:
+                    await ctx.send('Yanlış!\U0001f512')
+                if anahtar == 0:
+                    await ctx.send('Malesef bulamadın. Belki de en baştan başlayıp tekrar deneyebilirsin!\U0001f510')
 @bot.group()
 async def havalı(ctx):
     """Says if a user is cool.
@@ -79,11 +79,43 @@ async def havalı(ctx):
     if ctx.invoked_subcommand is None:
         await ctx.send(f'Hayır, {ctx.subcommand_passed} havalı değil.')
 
-#bot.command()
-#async def nasılsın(ctx, emojiler):
-#    emojiler = ["\N{crying face}", "\N{smiling face}", "\N{grinning face}", "\N{sad face}", ]
-#    durum = random.choices(emojiler)
-#    await ctx.send(durum)
+bot.command()
+async def nasilsin(ctx, emojiler):
+    emojiler = ["\U0001f62D", "\U0001f601", "\U0001f610", '\U0001f622', "\U0001f922", "\U0001f621", "\U0001f60C", "\U0001f62A", "\U0001fAE5", "\U0001f92A", "\U0001F973"]
+    durum = random.choices(emojiler)
+    if durum == "\U0001f62D":
+        await ctx.send(durum)
+        await ctx.send("Çok üzgünüüüm!!!")
+    if durum == "\U0001f601":
+        await ctx.send(durum)
+        await ctx.send("Çok mutluyum!!")
+    if durum == "\U0001f610":
+        await ctx.send(durum)
+        await ctx.send("...")
+    if durum == "\U0001f622":
+        await ctx.send(durum)
+        await ctx.send("Hiç moralim yok.")
+    if durum == "\U0001f922":
+        await ctx.send(durum)
+        await ctx.send("Çok köt...")
+    if durum == "\U0001f621":
+        await ctx.send(durum)
+        await ctx.send("Çok kızgınım!!")
+    if durum == "\U0001f60C":
+        await ctx.send(durum)
+        await ctx.send("Çok sakinim.")
+    if durum == "\U0001fAE5":
+        await ctx.send(durum)
+        await ctx.send("Ben aslında yoğum!")
+    if durum == "\U0001f92A":
+        await ctx.send(durum)
+        await ctx.send("Çok iyiyim gerçekten!")
+    if durum == "\U0001f62A":
+        await ctx.send(durum)
+        await ctx.send("Çok uykum var!")
+    if durum == "\U0001F973":
+        await ctx.send(durum)
+        await ctx.send("Hadi parti verelim!")
 
 
 
